@@ -1,27 +1,9 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 
 export default function Home() {
   const [copied, setCopied] = useState(false)
-  const router = useRouter()
-
-  useEffect(() => {
-    // Check for one-time auth token in URL (set after password entry)
-    const params = new URLSearchParams(window.location.search)
-    const authToken = params.get('auth')
-    
-    if (authToken === '1') {
-      // Remove the auth parameter from URL immediately (clean URL)
-      window.history.replaceState({}, '', window.location.pathname)
-      // Allow access for this page load only
-      return
-    }
-    
-    // No auth token - redirect to password page
-    router.push('/password')
-  }, [router])
 
   const copyEmail = async () => {
     try {
