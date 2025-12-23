@@ -24,7 +24,9 @@ export default function PasswordPage() {
       const data = await response.json()
 
       if (data.success) {
-        router.push('/')
+        // Redirect with one-time auth token (not the password itself)
+        // This token is immediately removed from URL on home page
+        router.push('/?auth=1')
         router.refresh()
       } else {
         setError('Incorrect password')
