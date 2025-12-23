@@ -25,8 +25,13 @@ export default function Home() {
             </h1>
 
             <p className="text-lg sm:text-xl text-[#2a2a2a] leading-[1.7] font-sans max-w-2xl">
-              i'm a student at{' '}
-              <a href="https://duke.edu" target="_blank" rel="noopener noreferrer" className="font-semibold text-duke-blue hover:underline">
+              i'm an incoming student at{' '}
+              <a
+                href="https://duke.edu"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-duke-blue hover:underline"
+              >
                 duke
               </a>{' '}
               studying{' '}
