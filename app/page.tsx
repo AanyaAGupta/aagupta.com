@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-16 lg:gap-20 items-start">
+        <div className="max-w-3xl">
           {/* Left Column - Text Content */}
           <div className="space-y-16">
             {/* Name & Bio */}
@@ -123,13 +123,10 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* Right Column */}
-          <div className="lg:sticky lg:top-12 space-y-12">
-            {/* Interests */}
+            {/* Interests Section */}
             <div className="space-y-5">
-              <h2 className="text-xl sm:text-2xl font-serif font-bold text-duke-blue tracking-tight">interests</h2>
+              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">interests</h2>
               <div className="text-sm text-[#4a4a4a] leading-[1.7] font-sans">
                 <p>rock climbing • baking • traveling • dogs</p>
               </div>
