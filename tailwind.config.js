@@ -9,6 +9,11 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-playfair)', 'serif'],
+      },
+      colors: {
+        'duke-blue': '#012169',
+        'duke-gold': '#FFC72C',
       },
     },
   },
