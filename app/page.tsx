@@ -16,26 +16,22 @@ export default function Home() {
   }
   return (
     <main className="min-h-screen bg-white">
-      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
-        <div className="max-w-3xl">
-          {/* Left Column - Text Content */}
-          <div className="space-y-16">
-            {/* Name & Bio */}
-            <div className="space-y-10">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-duke-blue leading-[1.05] tracking-[-0.02em]">
-                aanya gupta
-              </h1>
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
+        <div className="space-y-20">
+          {/* Name & Bio */}
+          <div className="space-y-8">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-duke-blue leading-[1.05] tracking-[-0.02em]">
+              aanya gupta
+            </h1>
 
-              <div className="space-y-6">
-                <p className="text-lg sm:text-xl text-[#2a2a2a] leading-[1.7] font-sans">
-                  i'm a student at{' '}
-                  <span className="font-semibold text-duke-blue">TJHSST</span> interested in{' '}
-                  <span className="font-semibold text-duke-blue">biomedical engineering</span>.
-                </p>
-              </div>
+            <p className="text-lg sm:text-xl text-[#2a2a2a] leading-[1.7] font-sans max-w-2xl">
+              i'm a student at{' '}
+              <span className="font-semibold text-duke-blue">TJHSST</span> interested in{' '}
+              <span className="font-semibold text-duke-blue">biomedical engineering</span>.
+            </p>
 
-              {/* Social Links */}
-              <div className="pt-1 flex items-center gap-6">
+            {/* Social Links */}
+            <div className="flex items-center gap-6 pt-2">
                 <a
                   href="https://github.com/AanyaAGupta"
                   target="_blank"
@@ -99,38 +95,37 @@ export default function Home() {
                   )}
                 </button>
               </div>
-            </div>
+          </div>
 
-            {/* Projects Section */}
-            <div className="space-y-6">
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">projects</h2>
-              <div className="space-y-8">
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
-                    agent-based modeling research
-                  </h3>
-                  <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans">
-                    developing data-driven agent-based models for predicting vaccine uptake and small area estimation techniques for public health research. co-author of multiple publications.
-                  </p>
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
-                    quantum software (MIT BWSI)
-                  </h3>
-                  <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans">
-                    implemented quantum algorithms (QFT, Deutsch-Jozsa, Shor's) using Q# and Qiskit. led capstone project simulating 1D transverse Ising spin chain, presented to 500+ audience.
-                  </p>
-                </div>
+          {/* Projects Section */}
+          <div className="space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">projects</h2>
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
+                  agent-based modeling research
+                </h3>
+                <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans max-w-2xl">
+                  developing data-driven agent-based models for predicting vaccine uptake and small area estimation techniques for public health research. co-author of multiple publications.
+                </p>
+              </div>
+              <div className="space-y-2">
+                <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
+                  quantum software (MIT BWSI)
+                </h3>
+                <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans max-w-2xl">
+                  implemented quantum algorithms (QFT, Deutsch-Jozsa, Shor's) using Q# and Qiskit. led capstone project simulating 1D transverse Ising spin chain, presented to 500+ audience.
+                </p>
               </div>
             </div>
+          </div>
 
-            {/* Interests Section */}
-            <div className="space-y-5">
-              <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">interests</h2>
-              <div className="text-sm text-[#4a4a4a] leading-[1.7] font-sans">
-                <p>rock climbing • baking • traveling • dogs</p>
-              </div>
-            </div>
+          {/* Interests Section */}
+          <div className="space-y-4">
+            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">interests</h2>
+            <p className="text-sm text-[#4a4a4a] leading-[1.7] font-sans">
+              rock climbing • baking • traveling • dogs
+            </p>
           </div>
         </div>
       </div>
