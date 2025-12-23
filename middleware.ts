@@ -2,35 +2,36 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 export function middleware(request: NextRequest) {
-  const password = request.nextUrl.searchParams.get('password')
-  const cookiePassword = request.cookies.get('site-password')?.value
-
-  // Get password from environment variable
-  const correctPassword = process.env.SITE_PASSWORD || 'dreams'
-
-  // If password is provided in URL and correct, set cookie
-  if (password === correctPassword) {
-    const response = NextResponse.next()
-    response.cookies.set('site-password', correctPassword, {
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-    })
-    return response
-  }
-
-  // If cookie exists and is correct, allow access
-  if (cookiePassword === correctPassword) {
+  // Check if password protection is enabled
+  const isProtected = process.env.PASSWORD_PROTECTED === 'true'
+  
+  // If protection is disabled, allow all access
+  if (!isProtected) {
     return NextResponse.next()
   }
 
-  // Otherwise, show password page
-  if (request.nextUrl.pathname !== '/password') {
-    return NextResponse.redirect(new URL('/password', request.url))
+  // Get password from URL query parameter (session-based, no cookies)
+  const password = request.nextUrl.searchParams.get('password')
+  const correctPassword = process.env.SITE_PASSWORD || 'dreams'
+
+  // If on password page, allow it
+  if (request.nextUrl.pathname === '/password') {
+    return NextResponse.next()
   }
 
-  return NextResponse.next()
+  // Check if correct password is in URL
+  if (password === correctPassword) {
+    // Allow access but don't set cookie - password needed every time
+    return NextResponse.next()
+  }
+
+  // If password was provided but incorrect, redirect to password page with error
+  if (password && password !== correctPassword) {
+    return NextResponse.redirect(new URL('/password?error=invalid', request.url))
+  }
+
+  // Otherwise, redirect to password page
+  return NextResponse.redirect(new URL('/password', request.url))
 }
 
 export const config = {

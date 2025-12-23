@@ -1,17 +1,25 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect, Suspense } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function PasswordPage() {
+function PasswordForm() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const router = useRouter()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    // Check if there's an error from a failed password attempt
+    if (searchParams.get('error') === 'invalid') {
+      setError('Incorrect password. Please try again.')
+    }
+  }, [searchParams])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (password) {
-      // Redirect with password in query string
+      // Redirect with password in query string - middleware will validate
       router.push(`/?password=${encodeURIComponent(password)}`)
     } else {
       setError('Please enter a password')
@@ -53,6 +61,18 @@ export default function PasswordPage() {
         </div>
       </div>
     </main>
+  )
+}
+
+export default function PasswordPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-duke-blue">Loading...</div>
+      </main>
+    }>
+      <PasswordForm />
+    </Suspense>
   )
 }
 
