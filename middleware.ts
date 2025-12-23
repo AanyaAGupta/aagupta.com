@@ -15,12 +15,21 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Check for session cookie
+  // Check for auth cookie with timestamp
   const authCookie = request.cookies.get('site-auth')?.value
 
-  // If authenticated, allow access
-  if (authCookie === 'authenticated') {
-    return NextResponse.next()
+  // If cookie exists, check if it's recent (within last 2 seconds)
+  if (authCookie) {
+    const timestamp = parseInt(authCookie)
+    const now = Date.now()
+    // Only allow if cookie was set within last 2 seconds (just for redirect)
+    if (!isNaN(timestamp) && (now - timestamp) < 2000) {
+      return NextResponse.next()
+    }
+    // Cookie expired or invalid, clear it
+    const response = NextResponse.redirect(new URL('/password', request.url))
+    response.cookies.delete('site-auth')
+    return response
   }
 
   // Otherwise, redirect to password page
