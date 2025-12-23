@@ -1,3 +1,3 @@
 # aagupta.com
 
-Personal website built with Next.js and Tailwind CSS.
+personal website built with Next.js and Tailwind CSS
