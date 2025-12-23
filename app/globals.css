@@ -7,9 +7,16 @@
   --duke-gold: #FFC72C;
 }
 
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 body {
   color: #1a1a1a;
   background: #ffffff;
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizeLegibility;
 }
 
 @layer utilities {
