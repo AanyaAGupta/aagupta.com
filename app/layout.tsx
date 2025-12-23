@@ -12,6 +12,10 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: 'Aanya Gupta',
   description: 'Personal website of Aanya Gupta',
+  icons: {
+    icon: '/icon.svg',
+    apple: '/icon.svg',
+  },
 }
 
 export default function RootLayout({
