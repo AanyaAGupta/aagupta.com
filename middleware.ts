@@ -10,24 +10,17 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Get password from URL query parameter (session-based, no cookies)
-  const password = request.nextUrl.searchParams.get('password')
-  const correctPassword = process.env.SITE_PASSWORD || 'dreams'
-
-  // If on password page, allow it
-  if (request.nextUrl.pathname === '/password') {
+  // Allow access to password page and API routes
+  if (request.nextUrl.pathname === '/password' || request.nextUrl.pathname.startsWith('/api/')) {
     return NextResponse.next()
   }
 
-  // Check if correct password is in URL
-  if (password === correctPassword) {
-    // Allow access but don't set cookie - password needed every time
-    return NextResponse.next()
-  }
+  // Check for session cookie
+  const authCookie = request.cookies.get('site-auth')?.value
 
-  // If password was provided but incorrect, redirect to password page with error
-  if (password && password !== correctPassword) {
-    return NextResponse.redirect(new URL('/password?error=invalid', request.url))
+  // If authenticated, allow access
+  if (authCookie === 'authenticated') {
+    return NextResponse.next()
   }
 
   // Otherwise, redirect to password page
@@ -44,7 +37,7 @@ export const config = {
      * - favicon.ico (favicon file)
      * - password (password page itself)
      */
-    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.svg).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico|icon.svg|apple-icon.svg|password).*)',
   ],
 }
 
