@@ -16,10 +16,10 @@ export default function Home() {
   }
   return (
     <main className="min-h-screen bg-white">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 py-20 sm:py-24 lg:py-32">
-        <div className="space-y-20">
+      <div className="max-w-4xl ml-0 sm:ml-6 lg:ml-12 px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
+        <div className="space-y-12">
           {/* Name & Bio */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-duke-blue leading-[1.05] tracking-[-0.02em]">
               aanya gupta
             </h1>
@@ -101,9 +101,9 @@ export default function Home() {
           </div>
 
           {/* Projects Section */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">projects</h2>
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="space-y-2">
                 <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
                   agent-based modeling research
@@ -124,7 +124,7 @@ export default function Home() {
           </div>
 
           {/* Interests Section */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">interests</h2>
             <p className="text-sm text-[#4a4a4a] leading-[1.7] font-sans">
               rock climbing • baking • traveling • dogs
