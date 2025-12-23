@@ -114,7 +114,7 @@ export default function Home() {
                   agent-based modeling research
                 </h3>
                 <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans max-w-2xl">
-                  developing data-driven agent-based models for predicting vaccine uptake and small area estimation techniques for public health research. co-author of multiple publications.
+                  developing data-driven agent-based models for predicting vaccine uptake and small area estimation techniques for public health research. authored 2 publications.
                 </p>
               </div>
               <div className="space-y-1.5">
