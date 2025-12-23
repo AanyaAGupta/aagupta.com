@@ -16,10 +16,10 @@ export default function Home() {
   }
   return (
     <main className="min-h-screen bg-white">
-      <div className="max-w-4xl ml-0 sm:ml-6 lg:ml-12 px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20">
-        <div className="space-y-12">
+      <div className="max-w-4xl ml-0 sm:ml-6 lg:ml-12 px-6 sm:px-8 lg:px-12 py-10 sm:py-14 lg:py-18">
+        <div className="space-y-10">
           {/* Name & Bio */}
-          <div className="space-y-6">
+          <div className="space-y-5">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-duke-blue leading-[1.05] tracking-[-0.02em]">
               aanya gupta
             </h1>
@@ -34,7 +34,7 @@ export default function Home() {
             </p>
 
             {/* Social Links */}
-            <div className="flex items-center gap-6 pt-2">
+            <div className="flex items-center gap-6 pt-1">
                 <a
                   href="https://github.com/AanyaAGupta"
                   target="_blank"
@@ -101,10 +101,10 @@ export default function Home() {
           </div>
 
           {/* Projects Section */}
-          <div className="space-y-5">
+          <div className="space-y-4">
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">projects</h2>
-            <div className="space-y-6">
-              <div className="space-y-2">
+            <div className="space-y-5">
+              <div className="space-y-1.5">
                 <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
                   agent-based modeling research
                 </h3>
@@ -112,7 +112,7 @@ export default function Home() {
                   developing data-driven agent-based models for predicting vaccine uptake and small area estimation techniques for public health research. co-author of multiple publications.
                 </p>
               </div>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
                   quantum software (MIT BWSI)
                 </h3>
