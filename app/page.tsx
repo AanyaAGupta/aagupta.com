@@ -1,143 +1,141 @@
-'use client'
+import Link from 'next/link'
+import { profile, pitches, goals } from '@/lib/content'
+import CopyEmail from '@/components/CopyEmail'
+import PhotoStack from '@/components/PhotoStack'
+import OrgLogo from '@/components/OrgLogo'
+import { ArrowIcon, GitHubIcon, LinkedInIcon, Topo } from '@/components/Marks'
 
-import { useState } from 'react'
+const stats = [
+  { value: '4', label: 'peer-reviewed publications' },
+  { value: '1st', label: 'of 520 at HackTJ' },
+  { value: '$18K+', label: 'raised for global education' },
+]
+
+const toolkit = ['Python', 'Java', 'R', 'Q# / Qiskit', 'Git']
+
+const explore = [
+  { href: '/climb', label: 'The Climb' },
+  { href: '/research', label: 'Research' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/about', label: 'About Me' },
+  { href: '/resume', label: 'Resume' },
+]
 
 export default function Home() {
-  const [copied, setCopied] = useState(false)
+  const latest = pitches.slice(0, 3)
 
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText('aanyaashi@gmail.com')
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch (err) {
-      console.error('Failed to copy email:', err)
-    }
-  }
   return (
-    <main className="min-h-screen bg-white">
-      <div className="max-w-4xl ml-0 sm:ml-6 lg:ml-12 px-6 sm:px-8 lg:px-12 py-10 sm:py-14 lg:py-18">
-        <div className="space-y-10">
-          {/* Name & Bio */}
-          <div className="space-y-5">
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-serif font-bold text-duke-blue leading-[1.05] tracking-[-0.02em]">
-              aanya gupta
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <Topo className="pointer-events-none absolute inset-0 h-full w-full text-pine/[0.07]" />
+        <div className="container-site relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.25fr_1fr] lg:py-24">
+          <div>
+            <p className="eyebrow animate-rise">Duke University · Class of {profile.gradYear}</p>
+            <h1 className="mt-4 animate-rise font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-granite sm:text-6xl lg:text-7xl">
+              Hi, I&apos;m Aanya.
             </h1>
-
-            <p className="text-lg sm:text-xl text-[#2a2a2a] leading-[1.7] font-sans max-w-2xl">
-              i'm an incoming student at{' '}
-              <a
-                href="https://duke.edu"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-duke-blue hover:underline"
-              >
-                duke
-              </a>{' '}
-              studying{' '}
-              <span className="font-semibold text-duke-blue">biomedical engineering</span>.
+            <p className="mt-6 max-w-xl animate-rise text-lg leading-relaxed text-granite-muted [animation-delay:80ms] sm:text-xl">
+              I study <span className="font-medium text-granite">biomedical engineering</span> and{' '}
+              <span className="font-medium text-granite">electrical &amp; computer engineering</span> at Duke. I like
+              building software and models that help people make better decisions about health, and I like
+              climbing rocks on the weekends.
             </p>
 
-            {/* Social Links */}
-            <div className="flex items-center gap-6 pt-1">
-                <a
-                  href="https://github.com/AanyaAGupta"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#4a4a4a] hover:text-duke-blue transition-colors duration-300"
-                  aria-label="GitHub"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
+            <div className="mt-8 flex flex-wrap items-center gap-3 animate-rise [animation-delay:160ms]">
+              <Link href="/climb" className="btn-primary">
+                See the climb <ArrowIcon />
+              </Link>
+              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                Resume
+              </a>
+              <div className="ml-2 flex items-center gap-4 text-granite-muted">
+                <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-pine">
+                  <GitHubIcon />
                 </a>
-                <a
-                  href="https://linkedin.com/in/aanyagupta1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[#4a4a4a] hover:text-duke-blue transition-colors duration-300"
-                  aria-label="LinkedIn"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                  </svg>
+                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-pine">
+                  <LinkedInIcon />
                 </a>
-                <button
-                  onClick={copyEmail}
-                  className="text-[#4a4a4a] hover:text-duke-blue transition-colors duration-300 relative"
-                  aria-label="Copy email"
-                  title={copied ? 'Copied!' : 'Copy email'}
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  {copied && (
-                    <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs text-duke-blue font-medium whitespace-nowrap">
-                      copied!
-                    </span>
-                  )}
-                </button>
-              </div>
-          </div>
-
-          {/* Projects Section */}
-          <div className="space-y-4">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">projects</h2>
-            <div className="space-y-5">
-              <div className="space-y-1.5">
-                <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
-                  agent-based modeling research
-                </h3>
-                <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans max-w-2xl">
-                  developing data-driven agent-based models for predicting vaccine uptake and small area estimation techniques for public health research. authored 2 publications.
-                </p>
-              </div>
-              <div className="space-y-1.5">
-                <h3 className="font-semibold text-[#1a1a1a] text-base leading-snug">
-                  quantum software (MIT BWSI)
-                </h3>
-                <p className="text-[#4a4a4a] text-sm leading-[1.7] font-sans max-w-2xl">
-                  implemented quantum algorithms (QFT, Deutsch-Jozsa, Shor's) using Q# and Qiskit. led capstone project simulating 1D transverse Ising spin chain, presented to 500+ audience.
-                </p>
+                <CopyEmail />
               </div>
             </div>
-          </div>
 
-          {/* Interests Section */}
-          <div className="space-y-3">
-            <h2 className="text-2xl sm:text-3xl font-serif font-bold text-duke-blue tracking-tight">interests</h2>
-            <p className="text-sm text-[#4a4a4a] leading-[1.7] font-sans">
-              rock climbing • baking • traveling • dogs
+            <p className="mt-8 max-w-xl animate-rise text-sm leading-relaxed text-granite-muted [animation-delay:200ms]">
+              <span className="mr-2 font-semibold uppercase tracking-[0.14em] text-granite">Toolkit</span>
+              {toolkit.join(' · ')}
             </p>
           </div>
+
+          <PhotoStack />
         </div>
-      </div>
-    </main>
+      </section>
+
+      {/* Stats */}
+      <section className="border-y border-granite/10 bg-sand/40">
+        <dl className="container-site grid grid-cols-1 gap-y-8 py-10 text-center sm:grid-cols-3">
+          {stats.map((s) => (
+            <div key={s.label}>
+              <dt className="sr-only">{s.label}</dt>
+              <dd className="font-serif text-3xl font-semibold text-pine sm:text-4xl">{s.value}</dd>
+              <dd className="mt-1 text-sm text-granite-muted">{s.label}</dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+
+      {/* Latest on the route */}
+      <section className="container-site py-20">
+        <div className="flex items-end justify-between gap-4">
+          <div>
+            <p className="eyebrow">Recent experience</p>
+            <h2 className="mt-2 font-serif text-3xl font-semibold tracking-tight">What I&apos;ve been up to</h2>
+          </div>
+          <Link href="/climb" className="link hidden text-sm sm:inline">
+            All experience →
+          </Link>
+        </div>
+        <ol className="mt-10 grid gap-5 md:grid-cols-3">
+          {latest.map((p) => (
+            <li key={p.org} className="rounded-2xl border border-granite/10 bg-surface/60 p-6">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xs font-medium uppercase tracking-wider text-granite-light">{p.dates}</p>
+                <OrgLogo src={p.logo} org={p.org} size="sm" className="-my-3" />
+              </div>
+              <h3 className="mt-2 font-serif text-xl font-semibold">{p.org}</h3>
+              <p className="mt-1 text-sm text-granite-muted">{p.role}</p>
+              {p.badge && <span className="tag mt-4 bg-clay-light text-clay">{p.badge}</span>}
+              <p className="mt-4 text-sm leading-relaxed text-granite-muted">{p.summary}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Goals */}
+      <section className="container-site">
+        <p className="eyebrow">Looking ahead</p>
+        <h2 className="mt-2 font-serif text-3xl font-semibold tracking-tight">What I&apos;m working toward</h2>
+        <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {goals.map((g, i) => (
+            <li key={g.title} className="rounded-2xl border border-granite/10 bg-surface/60 p-6">
+              <span className="font-serif text-3xl font-semibold text-clay/80">{String(i + 1).padStart(2, '0')}</span>
+              <h3 className="mt-3 font-serif text-lg font-semibold leading-snug">{g.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-granite-muted">{g.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      {/* Explore */}
+      <section className="container-site mt-20 text-center">
+        <h2 className="font-serif text-2xl font-semibold tracking-tight">Keep exploring</h2>
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {explore.map((e) => (
+            <Link key={e.href} href={e.href} className="btn-ghost bg-surface/60">
+              {e.label} <ArrowIcon />
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
   )
 }
-

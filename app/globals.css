@@ -2,9 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Palette as RGB channels. Light: chalk, granite, pine forest, desert-sunset clay. */
 :root {
-  --duke-blue: #012169;
-  --duke-gold: #FFC72C;
+  --chalk: 247 243 236;
+  --sand: 236 228 214;
+  --surface: 255 255 255;
+  --granite: 42 40 37;
+  --granite-muted: 95 90 82;
+  --granite-light: 140 134 123;
+  --pine: 47 74 60;
+  --pine-dark: 30 49 40;
+  --pine-light: 227 233 225;
+  --clay: 191 91 55;
+  --clay-light: 244 225 214;
+  color-scheme: light;
+}
+
+/* Dark: night on the trail, deep forest background with lamplight accents. */
+.dark {
+  --chalk: 21 25 22;
+  --sand: 33 39 34;
+  --surface: 29 34 30;
+  --granite: 236 231 221;
+  --granite-muted: 183 176 164;
+  --granite-light: 138 133 124;
+  --pine: 143 187 156;
+  --pine-dark: 170 208 180;
+  --pine-light: 36 53 43;
+  --clay: 227 134 96;
+  --clay-light: 64 41 31;
+  color-scheme: dark;
 }
 
 * {
@@ -12,11 +39,49 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  color: #1a1a1a;
-  background: #ffffff;
-  font-feature-settings: "kern" 1;
+  @apply bg-chalk text-granite;
+  font-feature-settings: 'kern' 1;
   text-rendering: optimizeLegibility;
+}
+
+::selection {
+  @apply bg-clay-light text-granite;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-site px-5 sm:px-8;
+  }
+
+  /* Small uppercase label that sits above headings ("pitch 03", "currently") */
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-clay;
+  }
+
+  .link {
+    @apply font-medium text-pine underline decoration-pine/30 underline-offset-4 transition-colors hover:decoration-clay hover:text-clay;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-colors;
+  }
+
+  .btn-primary {
+    @apply btn bg-pine text-chalk hover:bg-pine-dark;
+  }
+
+  .btn-ghost {
+    @apply btn border border-granite/15 text-granite hover:border-pine hover:text-pine;
+  }
+
+  .tag {
+    @apply inline-block rounded-full bg-pine-light px-2.5 py-0.5 text-xs font-medium text-pine;
+  }
 }
 
 @layer utilities {
@@ -25,3 +90,12 @@ body {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

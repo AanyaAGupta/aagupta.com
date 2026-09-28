@@ -1,37 +1,35 @@
 'use client'
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { Suspense, useState } from 'react'
+import { useRouter, useSearchParams } from 'next/navigation'
 
-export default function PasswordPage() {
+// Only reachable when password protection is on (see middleware.ts).
+function PasswordForm() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const from = useSearchParams().get('from') || '/'
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
     setLoading(true)
-
     try {
-      const response = await fetch('/api/password', {
+      const res = await fetch('/api/password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password }),
       })
-
-      const data = await response.json()
-
+      const data = await res.json()
       if (data.success) {
-        // Redirect to home page; middleware will allow this request
-        router.push('/')
+        router.replace(from.startsWith('/') && !from.startsWith('//') ? from : '/')
         router.refresh()
       } else {
         setError('Incorrect password')
         setPassword('')
       }
-    } catch (err) {
+    } catch {
       setError('Something went wrong')
     } finally {
       setLoading(false)
@@ -39,32 +37,35 @@ export default function PasswordPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white flex items-center justify-center px-6">
-      <form onSubmit={handleSubmit} className="w-full max-w-xs space-y-4">
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value)
-            setError('')
-          }}
-          placeholder="password"
-          className="w-full px-4 py-3 border-b-2 border-gray-300 focus:outline-none focus:border-duke-blue text-center text-lg"
-          autoFocus
-          disabled={loading}
-        />
-        {error && (
-          <p className="text-red-500 text-sm text-center">{error}</p>
-        )}
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full text-duke-blue hover:underline text-sm"
-        >
-          {loading ? '...' : 'enter'}
-        </button>
-      </form>
-    </main>
+    <form onSubmit={handleSubmit} className="w-full max-w-xs space-y-5 text-center">
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => {
+          setPassword(e.target.value)
+          setError('')
+        }}
+        placeholder="password"
+        aria-label="Password"
+        className="w-full border-b-2 border-granite/20 bg-transparent px-4 py-3 text-center text-lg focus:border-pine focus:outline-none"
+        autoFocus
+        disabled={loading}
+      />
+      {error && <p className="text-sm text-clay">{error}</p>}
+      <button type="submit" disabled={loading} className="btn-primary">
+        {loading ? '…' : 'Enter'}
+      </button>
+    </form>
   )
 }
 
+export default function PasswordPage() {
+  // Covers the site nav/footer so nothing is visible before unlocking.
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-chalk px-6">
+      <Suspense>
+        <PasswordForm />
+      </Suspense>
+    </div>
+  )
+}

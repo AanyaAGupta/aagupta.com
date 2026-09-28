@@ -1,17 +1,18 @@
 # aagupta.com
 
-Personal website built with Next.js and Tailwind CSS.
+Personal website built with Next.js and Tailwind CSS, deployed on Vercel.
 
-## Password Protection
+## Editing content
 
-This site is password protected. To set the password:
+Almost all copy (experience, publications, projects, photos) lives in `lib/content.ts`.
+Photos are in `public/photos`. Export new ones resized (~2000px) with location metadata stripped;
+full-size originals stay in `/img`, which is git-ignored.
 
-1. Go to your Vercel project dashboard
-2. Navigate to **Settings** → **Environment Variables**
-3. Add a new variable:
-   - **Name**: `SITE_PASSWORD`
-   - **Value**: Your desired password
-   - **Environment**: Production, Preview, Development (or just Production)
-4. Redeploy your site
+## Password protection (off by default)
 
-The password will be checked server-side and is never exposed in the code.
+Set these environment variables in Vercel → Settings → Environment Variables, then redeploy:
+
+- `SITE_PASSWORD_ENABLED` = `true`
+- `SITE_PASSWORD` = your password
+
+Remove `SITE_PASSWORD_ENABLED` to turn it off again.
