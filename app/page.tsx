@@ -31,7 +31,7 @@ export default function Home() {
         <Topo className="pointer-events-none absolute inset-0 h-full w-full text-pine/[0.07]" />
         <div className="container-site relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.25fr_1fr] lg:py-24">
           <div>
-            <p className="eyebrow animate-rise">Duke University · Class of {profile.gradYear}</p>
+            <p className="eyebrow animate-rise">Duke University</p>
             <h1 className="mt-4 animate-rise font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-granite sm:text-6xl lg:text-7xl">
               Hi, I&apos;m Aanya.
             </h1>
