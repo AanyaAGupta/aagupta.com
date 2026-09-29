@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { profile, pitches, goals } from '@/lib/content'
 import CopyEmail from '@/components/CopyEmail'
 import PhotoStack from '@/components/PhotoStack'
+import Climber from '@/components/Climber'
 import OrgLogo from '@/components/OrgLogo'
 import { ArrowIcon, GitHubIcon, LinkedInIcon, Topo } from '@/components/Marks'
 
@@ -35,35 +36,53 @@ export default function Home() {
             <h1 className="mt-4 animate-rise font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-granite sm:text-6xl lg:text-7xl">
               Hi, I&apos;m Aanya.
             </h1>
-            <p className="mt-6 max-w-xl animate-rise text-lg leading-relaxed text-granite-muted [animation-delay:80ms] sm:text-xl">
-              I study <span className="font-medium text-granite">biomedical engineering</span> and{' '}
-              <span className="font-medium text-granite">electrical &amp; computer engineering</span> at Duke. I like
-              building software and models that help people make better decisions about health, and I like
-              climbing rocks on the weekends.
-            </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 animate-rise [animation-delay:160ms]">
-              <Link href="/climb" className="btn-primary">
-                See the climb <ArrowIcon />
-              </Link>
-              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-ghost">
-                Resume
-              </a>
-              <div className="ml-2 flex items-center gap-4 text-granite-muted">
-                <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-pine">
-                  <GitHubIcon />
-                </a>
-                <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-pine">
-                  <LinkedInIcon />
-                </a>
-                <CopyEmail />
+            <div className="mt-6 flex items-center gap-6">
+              <div className="min-w-0 flex-1">
+                <p className="max-w-xl animate-rise text-lg leading-relaxed text-granite-muted [animation-delay:80ms] sm:text-xl">
+                  I study <span className="font-medium text-granite">biomedical engineering</span> and{' '}
+                  <span className="font-medium text-granite">electrical &amp; computer engineering</span> at Duke. I
+                  like building software and models that help people make better decisions about health, and I like
+                  climbing rocks on the weekends.
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-3 animate-rise [animation-delay:160ms]">
+                  <Link href="/climb" className="btn-primary">
+                    See the climb <ArrowIcon />
+                  </Link>
+                  <a href={profile.resume} target="_blank" rel="noopener noreferrer" className="btn-ghost">
+                    Resume
+                  </a>
+                  <div className="ml-2 flex items-center gap-4 text-granite-muted">
+                    <a
+                      href={profile.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                      className="hover:text-pine"
+                    >
+                      <GitHubIcon />
+                    </a>
+                    <a
+                      href={profile.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="hover:text-pine"
+                    >
+                      <LinkedInIcon />
+                    </a>
+                    <CopyEmail />
+                  </div>
+                </div>
+
+                <p className="mt-8 max-w-xl animate-rise text-sm leading-relaxed text-granite-muted [animation-delay:200ms]">
+                  <span className="mr-2 font-semibold uppercase tracking-[0.14em] text-granite">Toolkit</span>
+                  {toolkit.join(' · ')}
+                </p>
               </div>
+              <Climber className="hidden h-52 w-auto shrink-0 sm:block" />
             </div>
-
-            <p className="mt-8 max-w-xl animate-rise text-sm leading-relaxed text-granite-muted [animation-delay:200ms]">
-              <span className="mr-2 font-semibold uppercase tracking-[0.14em] text-granite">Toolkit</span>
-              {toolkit.join(' · ')}
-            </p>
           </div>
 
           <PhotoStack />

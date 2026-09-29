@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import PageHeader from '@/components/PageHeader'
 import TravelMap from '@/components/TravelMap'
+import AskTerminal from '@/components/AskTerminal'
 import { adventures, food } from '@/lib/content'
 
 export const metadata: Metadata = {
@@ -18,6 +19,13 @@ export default function AboutPage() {
           on a trail, or chasing a good sunset. Then I&apos;m looking for somewhere good to eat.
         </p>
       </PageHeader>
+
+      {/* Ask me anything */}
+      <section className="container-site pt-12">
+        <div className="mx-auto max-w-3xl">
+          <AskTerminal />
+        </div>
+      </section>
 
       {/* Outdoors */}
       <section className="container-site py-16">
