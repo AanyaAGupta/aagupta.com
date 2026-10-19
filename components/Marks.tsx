@@ -1,29 +1,5 @@
 // Small hand-drawn-feeling SVG marks used across the site.
 
-// Faint topographic contour lines, generated once, deterministic (no randomness => no hydration issues).
-export function Topo({ className = '' }: { className?: string }) {
-  const rings = Array.from({ length: 9 }, (_, i) => {
-    const r = 40 + i * 34
-    const pts = Array.from({ length: 64 }, (_, k) => {
-      const t = (k / 64) * Math.PI * 2
-      const wobble = 1 + 0.09 * Math.sin(3 * t + i * 0.7) + 0.05 * Math.cos(5 * t - i * 0.4)
-      const x = 420 + Math.cos(t) * r * 1.35 * wobble
-      const y = 260 + Math.sin(t) * r * wobble
-      return `${x.toFixed(1)},${y.toFixed(1)}`
-    })
-    return `M${pts.join('L')}Z`
-  })
-  return (
-    <svg viewBox="0 0 840 520" preserveAspectRatio="xMidYMid slice" className={className} aria-hidden="true">
-      <g fill="none" stroke="currentColor" strokeWidth="1">
-        {rings.map((d, i) => (
-          <path key={i} d={d} />
-        ))}
-      </g>
-    </svg>
-  )
-}
-
 export function GitHubIcon({ className = 'h-5 w-5' }: { className?: string }) {
   return (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

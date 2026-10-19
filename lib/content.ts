@@ -20,7 +20,7 @@ export const profile = {
 export type Pitch = {
   org: string
   role: string
-  dates: string
+  dates?: string
   location: string
   summary: string
   points: string[]
@@ -34,7 +34,6 @@ export const pitches: Pitch[] = [
     org: 'Duke University',
     logo: '/logos/duke.svg',
     role: 'B.S.E. Biomedical Engineering & Electrical and Computer Engineering (intended)',
-    dates: '2026 — 2030',
     location: 'Durham, NC',
     summary: 'Engineering at Duke.',
     points: [
@@ -138,10 +137,56 @@ export const honors = [
   '1st of 520, HackTJ',
 ]
 
-export const skills = [
-  { group: 'Languages & software', items: ['Python', 'C', 'C++', 'Java', 'R', 'Q#', 'Qiskit', 'HTML/CSS', 'Git/GitHub'] },
-  { group: 'Data & analytics', items: ['Statistical modeling', 'Agent-based modeling', 'Tableau', 'Power BI', 'Google Analytics'] },
-  { group: 'Engineering tools', items: ['AutoCAD', 'Fusion 360', 'Onshape'] },
+export type SkillGroup = {
+  group: string
+  icon: 'code' | 'atom' | 'chart' | 'flask' | 'cube' | 'tools'
+  blurb: string
+  items: string[]
+}
+
+export const skills: SkillGroup[] = [
+  {
+    group: 'Programming',
+    icon: 'code',
+    blurb: 'What I build models, pipelines, and apps in.',
+    items: ['Python', 'C', 'C++', 'Java', 'R', 'HTML/CSS'],
+  },
+  {
+    group: 'Research methods',
+    icon: 'flask',
+    blurb: 'The core of my public health work.',
+    items: [
+      'Agent-based modeling',
+      'Small-area estimation',
+      'Iterative proportional fitting',
+      'Spatial microsimulation',
+      'Statistical modeling',
+    ],
+  },
+  {
+    group: 'Data & visualization',
+    icon: 'chart',
+    blurb: 'Turning results into something people can read.',
+    items: ['Tableau', 'Power BI', 'Google Analytics', 'Data visualization'],
+  },
+  {
+    group: 'Quantum computing',
+    icon: 'atom',
+    blurb: 'From MIT Beaver Works.',
+    items: ['Q#', 'Qiskit', 'Quantum Fourier Transform', 'Shor’s algorithm'],
+  },
+  {
+    group: 'Engineering & CAD',
+    icon: 'cube',
+    blurb: 'Designing physical things.',
+    items: ['AutoCAD', 'Fusion 360', 'Onshape'],
+  },
+  {
+    group: 'Developer tools',
+    icon: 'tools',
+    blurb: 'How the work gets shipped.',
+    items: ['Git', 'GitHub', 'AWS', 'OpenAI API'],
+  },
 ]
 
 // ---------------------------------------------------------------------------
@@ -166,7 +211,8 @@ export const publications: Publication[] = [
   },
   {
     authors: 'Von Hoene, E., Gupta, A., et al.',
-    title: 'A Synthetic Population and Small-Area Estimate Dataset for Health Behaviors and Outcomes in the United States',
+    title:
+      'A Synthetic Population and Small-Area Estimate Dataset for Health Behaviors and Outcomes in the United States',
     venue: 'Nature Scientific Data',
     status: 'Accepted',
   },
@@ -181,7 +227,8 @@ export const publications: Publication[] = [
   },
   {
     authors: 'Von Hoene, E., Gupta, A., et al.',
-    title: 'Evaluating the Transferability of a Synthetic Population Generation Approach for Public Health Applications',
+    title:
+      'Evaluating the Transferability of a Synthetic Population Generation Approach for Public Health Applications',
     venue: 'Winter Simulation Conference',
     year: '2025',
     status: 'Published',
@@ -257,11 +304,41 @@ export const projects: Project[] = [
 // ---------------------------------------------------------------------------
 
 export const adventures = [
-  { src: '/photos/patagonia-rock-climbing.jpg', alt: 'Climbing a granite wall in Patagonia', caption: 'Climbing in El Chaltén, Patagonia', w: 2000, h: 1125 },
-  { src: '/photos/patagonia-glacier-hike.jpg', alt: 'Aanya hiking in front of a glacier', caption: 'Glacier hike, Patagonia', w: 1125, h: 2000 },
-  { src: '/photos/sedona-red-rocks.jpg', alt: 'Aanya among the red rocks of Sedona', caption: 'Red rocks, Sedona', w: 2000, h: 1500 },
-  { src: '/photos/arizona-slot-canyon.jpg', alt: 'Exploring a sandstone slot canyon', caption: 'Slot canyon, Arizona', w: 1500, h: 2000 },
-  { src: '/photos/patagonia-kayaking.jpg', alt: 'Kayaking on a glacial lake below mountains', caption: 'Kayaking near Bariloche', w: 2000, h: 1500 },
+  {
+    src: '/photos/patagonia-rock-climbing.jpg',
+    alt: 'Climbing a granite wall in Patagonia',
+    caption: 'Climbing in El Chaltén, Patagonia',
+    w: 2000,
+    h: 1125,
+  },
+  {
+    src: '/photos/patagonia-glacier-hike.jpg',
+    alt: 'Aanya hiking in front of a glacier',
+    caption: 'Glacier hike, Patagonia',
+    w: 1125,
+    h: 2000,
+  },
+  {
+    src: '/photos/sedona-red-rocks.jpg',
+    alt: 'Aanya among the red rocks of Sedona',
+    caption: 'Red rocks, Sedona',
+    w: 2000,
+    h: 1500,
+  },
+  {
+    src: '/photos/arizona-slot-canyon.jpg',
+    alt: 'Exploring a sandstone slot canyon',
+    caption: 'Slot canyon, Arizona',
+    w: 1500,
+    h: 2000,
+  },
+  {
+    src: '/photos/patagonia-kayaking.jpg',
+    alt: 'Kayaking on a glacial lake below mountains',
+    caption: 'Kayaking near Bariloche',
+    w: 2000,
+    h: 1500,
+  },
   { src: '/photos/surfing.jpg', alt: 'Aanya surfing a wave', caption: 'Catching a wave', w: 1206, h: 657 },
 ]
 
@@ -349,8 +426,14 @@ export const travels: Region[] = [
 export const goals = [
   { title: 'Travel the world', body: 'Seven countries so far, and there’s a long list of places I haven’t been yet.' },
   { title: 'Explore new things', body: 'New routes, new recipes, new fields. I’d rather try it than wonder about it.' },
-  { title: 'Build tech that helps health', body: 'Tools and models that help people make better decisions about their health.' },
-  { title: 'Meet new people & perspectives', body: 'The best ideas I’ve had came from conversations with people who think differently.' },
+  {
+    title: 'Build tech that helps health',
+    body: 'Tools and models that help people make better decisions about their health.',
+  },
+  {
+    title: 'Meet new people & perspectives',
+    body: 'The best ideas I’ve had came from conversations with people who think differently.',
+  },
 ]
 
 // ---------------------------------------------------------------------------

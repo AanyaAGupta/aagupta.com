@@ -4,13 +4,7 @@ import { profile, pitches } from '@/lib/content'
 import CopyEmail from '@/components/CopyEmail'
 import Climber from '@/components/Climber'
 import OrgLogo from '@/components/OrgLogo'
-import { ArrowIcon, GitHubIcon, LinkedInIcon, Topo } from '@/components/Marks'
-
-const stats = [
-  { value: '4', label: 'peer-reviewed publications' },
-  { value: '1st', label: 'of 520 at HackTJ' },
-  { value: '$18K+', label: 'raised for global education' },
-]
+import { ArrowIcon, GitHubIcon, LinkedInIcon } from '@/components/Marks'
 
 const explore = [
   { href: '/climb', label: 'Experience' },
@@ -25,17 +19,16 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
-        <Topo className="pointer-events-none absolute inset-0 h-full w-full text-pine/[0.06]" />
-        <div className="container-site relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.2fr_1fr] lg:py-24">
+      <section>
+        <div className="container-site grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.2fr_1fr] lg:py-24">
           <div>
             <h1 className="animate-rise font-serif text-5xl font-semibold leading-[1.02] tracking-tight text-granite sm:text-6xl lg:text-7xl">
               Hi, I&apos;m Aanya.
             </h1>
             <p className="mt-6 max-w-xl animate-rise text-lg leading-relaxed text-granite-muted [animation-delay:80ms] sm:text-xl">
               I study <span className="text-granite">biomedical engineering</span> and{' '}
-              <span className="text-granite">electrical &amp; computer engineering</span> at Duke. I build software
-              and models that help people make better decisions about health, and I spend my weekends climbing.
+              <span className="text-granite">electrical &amp; computer engineering</span> at Duke. I build software and
+              models that help people make better decisions about health, and I spend my weekends climbing.
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-3 animate-rise [animation-delay:160ms]">
@@ -46,7 +39,13 @@ export default function Home() {
                 Resume
               </a>
               <div className="ml-2 flex items-center gap-4 text-granite-muted">
-                <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-pine">
+                <a
+                  href={profile.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  className="hover:text-pine"
+                >
                   <GitHubIcon />
                 </a>
                 <a
@@ -91,19 +90,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="container-site">
-        <dl className="grid grid-cols-1 gap-6 border-y border-granite/10 py-8 sm:grid-cols-3 sm:gap-0 sm:divide-x sm:divide-granite/10">
-          {stats.map((s) => (
-            <div key={s.label} className="sm:px-8 sm:first:pl-0">
-              <dt className="sr-only">{s.label}</dt>
-              <dd className="font-serif text-3xl font-semibold text-granite">{s.value}</dd>
-              <dd className="mt-1 text-sm text-granite-muted">{s.label}</dd>
-            </div>
-          ))}
-        </dl>
-      </section>
-
       {/* Recent experience */}
       <section className="container-site py-20">
         <div className="flex items-end justify-between gap-4">
@@ -123,7 +109,7 @@ export default function Home() {
                 <p className="text-sm text-granite-muted">{p.role}</p>
               </div>
               <div className="hidden shrink-0 text-right md:block">
-                <p className="text-sm text-granite-muted">{p.dates}</p>
+                {p.dates && <p className="text-sm text-granite-muted">{p.dates}</p>}
                 {p.badge && <span className="badge mt-1">{p.badge}</span>}
               </div>
             </li>

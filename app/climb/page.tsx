@@ -3,6 +3,7 @@ import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
 import OrgLogo from '@/components/OrgLogo'
 import { pitches, honors, skills, profile } from '@/lib/content'
+import SkillIcon from '@/components/SkillIcon'
 
 export const metadata: Metadata = {
   title: 'The Climb',
@@ -29,7 +30,7 @@ export default function ClimbPage() {
                 <p className="mt-1 text-granite-muted">
                   {p.role} <span className="text-granite-light">· {p.location}</span>
                 </p>
-                <p className="mt-1 text-sm text-granite-light md:hidden">{p.dates}</p>
+                {p.dates && <p className="mt-1 text-sm text-granite-light md:hidden">{p.dates}</p>}
                 {p.badge && <span className="badge mt-3">{p.badge}</span>}
 
                 <ul className="mt-4 max-w-3xl space-y-2 leading-relaxed text-granite-muted">
@@ -53,31 +54,41 @@ export default function ClimbPage() {
         </ol>
       </section>
 
-      {/* Honors + skills */}
-      <section className="container-site mt-16 grid gap-12 md:grid-cols-2">
-        <div>
-          <h2 className="font-serif text-2xl font-semibold tracking-tight">Honors</h2>
-          <ul className="mt-5 space-y-3 text-granite-muted">
-            {honors.map((h) => (
-              <li key={h} className="flex gap-3">
-                <span className="mt-[0.7em] h-1 w-1 shrink-0 rounded-full bg-granite-light" aria-hidden="true" />
-                {h}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h2 className="font-serif text-2xl font-semibold tracking-tight">Skills &amp; tools</h2>
-          <dl className="mt-5 space-y-4">
-            {skills.map((s) => (
-              <div key={s.group}>
-                <dt className="text-sm font-semibold text-granite">{s.group}</dt>
-                <dd className="mt-1 text-granite-muted">{s.items.join(', ')}</dd>
+      {/* Skills */}
+      <section className="container-site mt-16">
+        <h2 className="font-serif text-3xl font-semibold tracking-tight">Skills &amp; tools</h2>
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {skills.map((s) => (
+            <div key={s.group} className="rounded-2xl border border-granite/10 p-6">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-pine-light text-pine">
+                  <SkillIcon name={s.icon} />
+                </span>
+                <h3 className="font-serif text-lg font-semibold leading-tight">{s.group}</h3>
               </div>
-            ))}
-          </dl>
+              <p className="mt-3 text-sm text-granite-muted">{s.blurb}</p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {s.items.map((it) => (
+                  <li key={it} className="rounded-full bg-sand px-3 py-1 text-sm text-granite">
+                    {it}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
+      </section>
+
+      {/* Honors */}
+      <section className="container-site mt-16">
+        <h2 className="font-serif text-3xl font-semibold tracking-tight">Honors</h2>
+        <ul className="mt-6 flex flex-wrap gap-2">
+          {honors.map((h) => (
+            <li key={h} className="rounded-full bg-sand px-4 py-1.5 text-granite">
+              {h}
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="container-site mt-14">
