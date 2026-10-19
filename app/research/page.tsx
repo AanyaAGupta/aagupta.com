@@ -149,13 +149,6 @@ export default function ResearchPage() {
                   <Authors text={p.authors} />
                 </p>
                 <p className="mt-4 leading-relaxed text-granite-muted">{p.summary}</p>
-                <ul className="mt-4 flex flex-wrap gap-2">
-                  {p.highlights.map((h) => (
-                    <li key={h} className="tag">
-                      {h}
-                    </li>
-                  ))}
-                </ul>
                 <a href={p.pdf} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-6">
                   View poster (PDF)
                 </a>

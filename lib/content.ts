@@ -10,7 +10,7 @@ export const profile = {
   school: 'Duke University',
   major: 'Biomedical Engineering & Electrical and Computer Engineering',
   majorNote: 'intended double major',
-  gradYear: '2030',
+  gradYear: '2029',
 }
 
 // ---------------------------------------------------------------------------
@@ -137,56 +137,44 @@ export const honors = [
   '1st of 520, HackTJ',
 ]
 
-export type SkillGroup = {
-  group: string
-  icon: 'code' | 'atom' | 'chart' | 'flask' | 'cube' | 'tools'
-  blurb: string
-  items: string[]
-}
+export type SkillGroup = { group: string; items: string[] }
 
+// Every skill here traces back to the resume, papers, poster, or coursework.
 export const skills: SkillGroup[] = [
+  { group: 'Languages', items: ['Python', 'C', 'C++', 'Java', 'R', 'HTML/CSS'] },
   {
-    group: 'Programming',
-    icon: 'code',
-    blurb: 'What I build models, pipelines, and apps in.',
-    items: ['Python', 'C', 'C++', 'Java', 'R', 'HTML/CSS'],
-  },
-  {
-    group: 'Research methods',
-    icon: 'flask',
-    blurb: 'The core of my public health work.',
+    group: 'Research & modeling',
     items: [
       'Agent-based modeling',
+      'Synthetic population generation',
       'Small-area estimation',
       'Iterative proportional fitting',
       'Spatial microsimulation',
+      'Geographically weighted surrogate models',
       'Statistical modeling',
     ],
   },
   {
-    group: 'Data & visualization',
-    icon: 'chart',
-    blurb: 'Turning results into something people can read.',
-    items: ['Tableau', 'Power BI', 'Google Analytics', 'Data visualization'],
+    group: 'Data & ML',
+    items: [
+      'Anomaly detection',
+      'Model benchmarking & evaluation',
+      'Synthetic data',
+      'Reproducible data pipelines',
+      'Geospatial analysis',
+      'Tableau',
+      'Power BI',
+      'Google Analytics',
+    ],
   },
+  { group: 'Quantum computing', items: ['Q#', 'Qiskit', 'Quantum Fourier Transform', 'Shor’s algorithm', 'Ising model simulation'] },
+  { group: 'Software & tools', items: ['Git/GitHub', 'AWS', 'OpenAI API', 'Computer vision', 'Mobile & web development'] },
+  { group: 'Engineering & CAD', items: ['AutoCAD', 'Fusion 360', 'Onshape', 'Engineering design'] },
   {
-    group: 'Quantum computing',
-    icon: 'atom',
-    blurb: 'From MIT Beaver Works.',
-    items: ['Q#', 'Qiskit', 'Quantum Fourier Transform', 'Shor’s algorithm'],
+    group: 'Math & CS foundations',
+    items: ['Data structures & algorithms', 'Linear algebra', 'Multivariable calculus', 'Differential equations', 'Statistics'],
   },
-  {
-    group: 'Engineering & CAD',
-    icon: 'cube',
-    blurb: 'Designing physical things.',
-    items: ['AutoCAD', 'Fusion 360', 'Onshape'],
-  },
-  {
-    group: 'Developer tools',
-    icon: 'tools',
-    blurb: 'How the work gets shipped.',
-    items: ['Git', 'GitHub', 'AWS', 'OpenAI API'],
-  },
+  { group: 'Communication', items: ['Scientific writing (4 peer-reviewed papers)', 'Research posters & talks (500+ audience)'] },
 ]
 
 // ---------------------------------------------------------------------------
@@ -424,15 +412,15 @@ export const travels: Region[] = [
 // ---------------------------------------------------------------------------
 
 export const goals = [
-  { title: 'Travel the world', body: 'Seven countries so far, and there’s a long list of places I haven’t been yet.' },
-  { title: 'Explore new things', body: 'New routes, new recipes, new fields. I’d rather try it than wonder about it.' },
+  { title: 'Travel the world', body: 'I’ve been to seven countries so far, and the list of places I still want to see keeps getting longer.' },
+  { title: 'Explore new things', body: 'Whether it’s a new climbing route or a class outside my major, I’d rather try it than wonder about it.' },
   {
     title: 'Build tech that helps health',
-    body: 'Tools and models that help people make better decisions about their health.',
+    body: 'I want to build tools that help people make better decisions about their health.',
   },
   {
     title: 'Meet new people & perspectives',
-    body: 'The best ideas I’ve had came from conversations with people who think differently.',
+    body: 'Some of my best ideas have come from talking with people who see things differently than I do.',
   },
 ]
 
@@ -450,7 +438,6 @@ export const posters = [
     year: '2025',
     summary:
       'The CDC’s county-level health estimates (CDC PLACES) are the standard, but their methods are complex and hard to reuse. I validated an open method that builds synthetic populations from public survey data (iterative proportional fitting) against CDC PLACES and state health department data for cancer in New York and diabetes and COPD in Florida. It tracked real county patterns about as well as the CDC’s estimates, and had lower error for New York cancer prevalence.',
-    highlights: ['3 health outcomes · 2 states', 'r up to 0.75 vs. state data', 'Lower error than CDC for NY cancer'],
     pdf: '/research/Gupta_ASSIP_2025_Poster.pdf',
     image: '/research/assip-2025-poster.jpg',
   },

@@ -3,7 +3,6 @@ import Link from 'next/link'
 import PageHeader from '@/components/PageHeader'
 import OrgLogo from '@/components/OrgLogo'
 import { pitches, honors, skills, profile } from '@/lib/content'
-import SkillIcon from '@/components/SkillIcon'
 
 export const metadata: Metadata = {
   title: 'The Climb',
@@ -57,34 +56,23 @@ export default function ClimbPage() {
       {/* Skills */}
       <section className="container-site mt-16">
         <h2 className="font-serif text-3xl font-semibold tracking-tight">Skills &amp; tools</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="mt-6 divide-y divide-granite/10 border-y border-granite/10">
           {skills.map((s) => (
-            <div key={s.group} className="rounded-2xl border border-granite/10 p-6">
-              <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-pine-light text-pine">
-                  <SkillIcon name={s.icon} />
-                </span>
-                <h3 className="font-serif text-lg font-semibold leading-tight">{s.group}</h3>
-              </div>
-              <p className="mt-3 text-sm text-granite-muted">{s.blurb}</p>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {s.items.map((it) => (
-                  <li key={it} className="rounded-full bg-sand px-3 py-1 text-sm text-granite">
-                    {it}
-                  </li>
-                ))}
-              </ul>
+            <div key={s.group} className="grid gap-1 py-4 sm:grid-cols-[220px_1fr] sm:gap-6">
+              <dt className="font-semibold text-granite">{s.group}</dt>
+              <dd className="leading-relaxed text-granite-muted">{s.items.join(' · ')}</dd>
             </div>
           ))}
-        </div>
+        </dl>
       </section>
 
       {/* Honors */}
       <section className="container-site mt-16">
         <h2 className="font-serif text-3xl font-semibold tracking-tight">Honors</h2>
-        <ul className="mt-6 flex flex-wrap gap-2">
+        <ul className="mt-6 grid gap-x-12 gap-y-3 sm:grid-cols-2">
           {honors.map((h) => (
-            <li key={h} className="rounded-full bg-sand px-4 py-1.5 text-granite">
+            <li key={h} className="flex gap-3 text-granite">
+              <span className="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-clay" aria-hidden="true" />
               {h}
             </li>
           ))}

@@ -36,7 +36,7 @@ const intents: Intent[] = [
   {
     keys: ['whoami', 'who are you', 'yourself', 'introduce', 'aanya'],
     answer: () =>
-      'I’m Aanya Gupta, an engineering student at Duke. I build software and models that help people make better decisions about health, and I spend my free time climbing, hiking, and finding good food.',
+      'I’m Aanya Gupta, an engineering student at Duke. I build software and models that help people make better decisions about health. Outside of class I’m usually climbing or looking for something good to eat.',
   },
   {
     keys: ['study', 'major', 'duke', 'school', 'college', 'university', 'education', 'degree', 'bme', 'ece'],
@@ -71,16 +71,16 @@ const intents: Intent[] = [
   {
     keys: ['climb', 'boulder', 'rock', 'outdoor', 'hike', 'hiking', 'hobby', 'hobbies', 'fun', 'free time', 'weekend'],
     answer: () =>
-      'Climbing is my favorite way to think: every route is a problem you solve one move at a time. I founded TJClimbing in high school, and I’ll take any excuse to be outside, from glaciers in Patagonia to slot canyons in Arizona.',
+      'Climbing is the thing I always come back to. Every route is a puzzle you work out one move at a time. I founded TJClimbing in high school to get more people trying it, and I’ll take any excuse to be outside.',
   },
   {
     keys: ['coco', 'dog', 'pet', 'puppy'],
-    answer: () => 'Coco is my dog, my favorite hiking buddy, and the self-appointed goalie of our backyard. 🐶',
+    answer: () => 'Coco is my dog and my favorite hiking partner. She also thinks she’s the goalie for every game in our backyard. 🐶',
   },
   {
     keys: ['food', 'eat', 'bake', 'baking', 'cook', 'restaurant', 'hungry'],
     answer: () =>
-      'Huge food lover. Tacos, mezze, shakshuka, Thai, a proper Indian feast: I’ll try anything once. I also bake, so there’s usually a cookie involved.',
+      'I really love food and will try almost anything. A big Indian dinner is hard to beat. I also bake, so there’s usually a cookie nearby.',
   },
   {
     keys: ['travel', 'place', 'been', 'country', 'countries', 'visit', 'trip'],
@@ -88,7 +88,7 @@ const intents: Intent[] = [
   },
   {
     keys: ['sunset', 'golden hour'],
-    answer: () => 'If there’s a ridge with a view at the end of the day, I’m staying until the sun is gone. 🌅',
+    answer: () => 'If there’s a ridge with a view at the end of the day, I’m staying until the sun goes down. 🌅',
   },
   {
     keys: ['goal', 'future', 'ahead', 'dream', 'plan'],

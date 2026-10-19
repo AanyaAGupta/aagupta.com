@@ -15,8 +15,8 @@ export default function AboutPage() {
     <>
       <PageHeader title="Beyond the resume">
         <p>
-          When I&apos;m not in class or building something, I&apos;m probably outside, whether that&apos;s on a wall,
-          on a trail, or chasing a good sunset. Then I&apos;m looking for somewhere good to eat.
+          Outside of class, I&apos;m usually outdoors, most often on a climbing wall. Ask me anything below, or
+          scroll down to see where I&apos;ve been and what I&apos;ve been eating.
         </p>
       </PageHeader>
 
@@ -30,11 +30,12 @@ export default function AboutPage() {
       {/* Outdoors */}
       <section className="container-site py-16">
         <div className="max-w-2xl">
-          <h2 className="font-serif text-3xl font-semibold tracking-tight">Rock, trail &amp; water</h2>
+          <h2 className="font-serif text-3xl font-semibold tracking-tight">Getting outside</h2>
           <p className="mt-4 leading-relaxed text-granite-muted">
-            Climbing is my favorite way to think. Every route is a problem to solve one move at a time, which is
-            also how I approach engineering. I founded TJClimbing in high school to get more people on the wall,
-            and I&apos;ll take any excuse to be outdoors, from Patagonian glaciers to Arizona slot canyons.
+            Climbing is the thing I always come back to. Every route is a puzzle: you plan it from the ground, then
+            work it out one move at a time once you&apos;re on the wall. I liked it enough to found TJClimbing in high
+            school so more people would give it a try. I&apos;ll take any excuse to be outside, and hiking in Patagonia
+            is still one of my favorite trips.
           </p>
         </div>
 
@@ -79,8 +80,8 @@ export default function AboutPage() {
           <div className="pt-5">
             <h2 className="font-serif text-2xl font-semibold">Meet Coco</h2>
             <p className="mt-2 leading-relaxed text-granite-muted">
-              My dog, my favorite hiking buddy, and the self-appointed goalie of our backyard. Anything dogs,
-              honestly, but Coco is number one.
+              Coco is my dog and my favorite hiking partner. She also thinks she&apos;s the goalie for every game in
+              our backyard. I love pretty much every dog I meet, but she&apos;s number one.
             </p>
           </div>
         </div>
@@ -97,7 +98,7 @@ export default function AboutPage() {
           <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:p-8">
             <h2 className="font-serif text-2xl font-semibold sm:text-3xl">A sucker for a good sunset</h2>
             <p className="mt-2 max-w-md text-white/85">
-              If there&apos;s a ridge with a view at the end of the day, I&apos;m staying until the sun is gone.
+              If there&apos;s a ridge with a view at the end of the day, I&apos;m staying until the sun goes down.
             </p>
           </div>
         </div>
@@ -106,10 +107,10 @@ export default function AboutPage() {
       {/* Food */}
       <section className="container-site py-20">
         <div className="max-w-2xl">
-          <h2 className="font-serif text-3xl font-semibold tracking-tight">A (huge) food lover</h2>
+          <h2 className="font-serif text-3xl font-semibold tracking-tight">I really love food</h2>
           <p className="mt-4 leading-relaxed text-granite-muted">
-            Tacos, mezze, shakshuka, Thai, a proper Indian feast: I&apos;ll try anything once and most things
-            twice. I also bake, so there&apos;s usually a cookie involved somewhere. A small sample of the camera roll:
+            I&apos;ll try almost anything, and my camera roll is mostly proof of that. A big Indian dinner is hard to
+            beat. I also bake, so there&apos;s usually a cookie nearby. Here are a few favorites.
           </p>
         </div>
 
