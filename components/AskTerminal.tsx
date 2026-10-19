@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { profile, pitches, publications, projects, travels, goals, skills } from '@/lib/content'
+import { profile, pitches, publications, posters, projects, travels, goals, skills } from '@/lib/content'
 
 // A small "ask me anything" terminal. Answers are pre-written from lib/content.ts and matched by keyword,
 // so it works with no backend.
@@ -52,10 +52,12 @@ const intents: Intent[] = [
         .join('\n') + `\n\nFull resume: ${profile.resume}`,
   },
   {
-    keys: ['research', 'paper', 'publication', 'publish', 'abm', 'agent', 'public health', 'scholar'],
+    keys: ['research', 'paper', 'publication', 'publish', 'poster', 'assip', 'abm', 'agent', 'public health', 'scholar'],
     answer: () =>
       'I work on computational public health with Dr. Taylor Anderson: agent-based models and small-area estimation to predict local health outcomes.\n\n' +
       publications.map((p) => `• ${p.title} (${p.venue}, ${p.status === 'Accepted' ? 'accepted' : p.year})`).join('\n') +
+      '\n\nPoster: ' +
+      posters.map((p) => `${p.title} (${p.venue.split(',')[0].replace(/ \(.*\)/, '')} ${p.year})`).join('\n') +
       `\n\nGoogle Scholar: ${profile.scholar}`,
   },
   {

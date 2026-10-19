@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="container-site flex flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-granite-muted">
-            Always looking for the next route. Let&apos;s talk:{' '}
+            Get in touch:{' '}
             <a href={`mailto:${profile.email}`} className="link">
               {profile.email}
             </a>

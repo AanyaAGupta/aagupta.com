@@ -1,20 +1,5 @@
 // Small hand-drawn-feeling SVG marks used across the site.
 
-// Irregular climbing-hold shapes; `variant` picks one so the route looks varied.
-const HOLDS = [
-  'M4 9C3 5 7 2 11 3s7 3 6 7-5 5-8 5-4-2-5-6Z',
-  'M3 7c1-4 6-5 10-4s5 5 3 8-7 4-10 2-4-3-3-6Z',
-  'M5 5c3-3 9-3 11 1s-1 8-5 9-8-1-8-4 0-4 2-6Z',
-]
-
-export function Hold({ variant = 0, className = 'h-5 w-5' }: { variant?: number; className?: string }) {
-  return (
-    <svg viewBox="0 0 20 18" className={className} aria-hidden="true">
-      <path d={HOLDS[variant % HOLDS.length]} />
-    </svg>
-  )
-}
-
 // Faint topographic contour lines, generated once, deterministic (no randomness => no hydration issues).
 export function Topo({ className = '' }: { className?: string }) {
   const rings = Array.from({ length: 9 }, (_, i) => {

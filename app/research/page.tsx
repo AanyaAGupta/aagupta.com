@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import PageHeader from '@/components/PageHeader'
-import { publications, profile } from '@/lib/content'
+import { publications, posters, profile } from '@/lib/content'
 
 export const metadata: Metadata = {
   title: 'Research',
@@ -50,7 +51,7 @@ function Authors({ text }: { text: string }) {
 export default function ResearchPage() {
   return (
     <>
-      <PageHeader eyebrow="Research" title="Modeling health, one county at a time">
+      <PageHeader title="Modeling health, one county at a time">
         <p>
           Since 2024 I&apos;ve worked with Dr. Taylor Anderson on computational public health, building models that
           estimate health outcomes where data is thin, so local decision-makers aren&apos;t guessing. The code and
@@ -61,12 +62,12 @@ export default function ResearchPage() {
         </a>
       </PageHeader>
 
-      <section className="container-site py-16">
-        <div className="grid gap-5 md:grid-cols-3">
+      <section className="container-site pb-16 pt-6">
+        <div className="grid gap-8 md:grid-cols-3">
           {themes.map((t) => (
-            <div key={t.title} className="rounded-2xl border border-granite/10 bg-surface/70 p-6">
-              <span className="tag bg-clay-light text-clay">{t.stat}</span>
-              <h2 className="mt-4 font-serif text-xl font-semibold">{t.title}</h2>
+            <div key={t.title} className="border-t border-granite/15 pt-5">
+              <h2 className="font-serif text-xl font-semibold">{t.title}</h2>
+              <p className="mt-1 text-sm font-medium text-clay">{t.stat}</p>
               <p className="mt-2 text-sm leading-relaxed text-granite-muted">{t.body}</p>
             </div>
           ))}
@@ -74,18 +75,13 @@ export default function ResearchPage() {
       </section>
 
       <section className="container-site">
-        <p className="eyebrow">Publications</p>
-        <h2 className="mt-2 font-serif text-3xl font-semibold tracking-tight">Peer-reviewed papers</h2>
+        <h2 className="font-serif text-3xl font-semibold tracking-tight">Peer-reviewed papers</h2>
 
         <ol className="mt-8 divide-y divide-granite/10 border-y border-granite/10">
           {publications.map((p) => (
             <li key={p.title} className="grid gap-3 py-6 sm:grid-cols-[7rem_1fr]">
               <div>
-                <span
-                  className={`tag ${p.status === 'Accepted' ? 'bg-clay-light text-clay' : ''}`}
-                >
-                  {p.status === 'Accepted' ? 'Accepted' : p.year}
-                </span>
+                <span className="text-sm text-granite-light">{p.status === 'Accepted' ? 'Accepted' : p.year}</span>
               </div>
               <div>
                 <h3 className="font-serif text-lg font-semibold leading-snug">
@@ -120,6 +116,53 @@ export default function ResearchPage() {
           </a>
           .
         </p>
+      </section>
+
+      <section className="container-site mt-20">
+        <h2 className="font-serif text-3xl font-semibold tracking-tight">Posters</h2>
+        <div className="mt-8 space-y-8">
+          {posters.map((p) => (
+            <article key={p.pdf} className="grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+              <a
+                href={p.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block overflow-hidden rounded-xl border border-granite/10 bg-white shadow-sm"
+                aria-label={`Open poster: ${p.officialTitle} (PDF)`}
+              >
+                <Image
+                  src={p.image}
+                  alt={`Research poster: ${p.officialTitle}`}
+                  width={1400}
+                  height={1050}
+                  sizes="(min-width: 1024px) 560px, 100vw"
+                  className="h-auto w-full transition-transform duration-500 group-hover:scale-[1.02]"
+                />
+              </a>
+              <div>
+                <p className="text-sm text-granite-light">
+                  {p.venue} · {p.year}
+                </p>
+                <h3 className="mt-2 font-serif text-2xl font-semibold leading-snug tracking-tight">{p.title}</h3>
+                <p className="mt-2 text-sm italic text-granite-muted">{p.officialTitle}</p>
+                <p className="mt-1 text-sm text-granite-muted">
+                  <Authors text={p.authors} />
+                </p>
+                <p className="mt-4 leading-relaxed text-granite-muted">{p.summary}</p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {p.highlights.map((h) => (
+                    <li key={h} className="tag">
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+                <a href={p.pdf} target="_blank" rel="noopener noreferrer" className="btn-ghost mt-6">
+                  View poster (PDF)
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </>
   )

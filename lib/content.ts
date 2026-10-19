@@ -3,7 +3,7 @@
 export const profile = {
   scholar: 'https://scholar.google.com/citations?user=KvBO2ugAAAAJ&hl=en',
   name: 'Aanya Gupta',
-  email: 'aanya.gupta30@duke.edu',
+  email: 'aanyaashi@gmail.com',
   github: 'https://github.com/AanyaAGupta',
   linkedin: 'https://linkedin.com/in/aanyagupta1',
   resume: '/Aanya_Gupta_Resume.pdf',
@@ -36,7 +36,7 @@ export const pitches: Pitch[] = [
     role: 'B.S.E. Biomedical Engineering & Electrical and Computer Engineering (intended)',
     dates: '2026 — 2030',
     location: 'Durham, NC',
-    summary: 'Where the route goes next.',
+    summary: 'Engineering at Duke.',
     points: [
       'Relevant coursework: Data Structures & Computer Algorithms, Differential Equations, Chemistry/Biology, Engineering Design',
     ],
@@ -123,7 +123,7 @@ export const pitches: Pitch[] = [
     role: 'Advanced Studies Diploma · GPA 4.60 (W)',
     dates: 'Aug 2022 — Jun 2026',
     location: 'Alexandria, VA',
-    summary: 'Base camp.',
+    summary: 'High school.',
     points: [
       'Founder, TJClimbing NGO · Associate Editor-in-Chief, TEKNOS Research Journal · President, Coding Lady Colonials',
       'Coursework: Statistics, Multivariable Calculus, Linear Algebra, AP Physics, Computer Vision, Mobile/Web Dev',
@@ -351,4 +351,24 @@ export const goals = [
   { title: 'Explore new things', body: 'New routes, new recipes, new fields. I’d rather try it than wonder about it.' },
   { title: 'Build tech that helps health', body: 'Tools and models that help people make better decisions about their health.' },
   { title: 'Meet new people & perspectives', body: 'The best ideas I’ve had came from conversations with people who think differently.' },
+]
+
+// ---------------------------------------------------------------------------
+// Posters & presentations
+// ---------------------------------------------------------------------------
+
+export const posters = [
+  {
+    title: 'An open, reproducible alternative to the CDC’s county health estimates',
+    officialTitle:
+      'Validating a Direct Survey-Based Population Synthesis Approach for Small Area Estimation of Health Indicators',
+    authors: 'Gupta, A., Von Hoene, E., Anderson, T.',
+    venue: 'Aspiring Scientists Summer Internship Program (ASSIP), George Mason University',
+    year: '2025',
+    summary:
+      'The CDC’s county-level health estimates (CDC PLACES) are the standard, but their methods are complex and hard to reuse. I validated an open method that builds synthetic populations from public survey data (iterative proportional fitting) against CDC PLACES and state health department data for cancer in New York and diabetes and COPD in Florida. It tracked real county patterns about as well as the CDC’s estimates, and had lower error for New York cancer prevalence.',
+    highlights: ['3 health outcomes · 2 states', 'r up to 0.75 vs. state data', 'Lower error than CDC for NY cancer'],
+    pdf: '/research/Gupta_ASSIP_2025_Poster.pdf',
+    image: '/research/assip-2025-poster.jpg',
+  },
 ]

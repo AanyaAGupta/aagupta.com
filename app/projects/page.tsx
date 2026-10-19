@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <PageHeader eyebrow="Projects" title="Things I’ve built">
+      <PageHeader title="Things I’ve built">
         <p>From quantum circuits to hackathon apps. A mix of research, internships, and building things for fun.</p>
       </PageHeader>
 
@@ -35,7 +35,7 @@ export default function ProjectsPage() {
                     <ArrowIcon className="mt-1 h-5 w-5 shrink-0 text-granite-light transition-transform group-hover:translate-x-1 group-hover:text-pine" />
                   )}
                 </div>
-                {p.highlight && <span className="tag mt-4 bg-clay-light text-clay">{p.highlight}</span>}
+                {p.highlight && <span className="badge mt-4">{p.highlight}</span>}
                 <p className="mt-4 leading-relaxed text-granite-muted">{p.description}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
@@ -47,7 +47,7 @@ export default function ProjectsPage() {
               </>
             )
             const cls =
-              'group block h-full rounded-2xl border border-granite/10 bg-surface/70 p-7 transition-all'
+              'group block h-full rounded-2xl border border-granite/10 p-7 transition-colors'
             return p.href ? (
               external ? (
                 <a
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
                   href={p.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${cls} hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-lg hover:shadow-granite/5`}
+                  className={`${cls} hover:border-pine/40 hover:bg-surface/60`}
                 >
                   {card}
                 </a>
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
                 <Link
                   key={p.title}
                   href={p.href}
-                  className={`${cls} hover:-translate-y-0.5 hover:border-pine/40 hover:shadow-lg hover:shadow-granite/5`}
+                  className={`${cls} hover:border-pine/40 hover:bg-surface/60`}
                 >
                   {card}
                 </Link>

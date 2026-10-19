@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function ResumePage() {
   return (
     <>
-      <PageHeader eyebrow="Resume" title="The one-page version">
+      <PageHeader title="The one-page version">
         <p>Everything on this site, condensed to a single page.</p>
         <div className="mt-6 flex flex-wrap gap-3">
           <a href={profile.resume} download className="btn-primary">

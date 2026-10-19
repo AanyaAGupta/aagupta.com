@@ -59,10 +59,6 @@ body {
   }
 
   /* Small uppercase label that sits above headings ("pitch 03", "currently") */
-  .eyebrow {
-    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-clay;
-  }
-
   .link {
     @apply font-medium text-pine underline decoration-pine/30 underline-offset-4 transition-colors hover:decoration-clay hover:text-clay;
   }
@@ -79,8 +75,13 @@ body {
     @apply btn border border-granite/15 text-granite hover:border-pine hover:text-pine;
   }
 
+  /* Neutral label; .badge is the one accented variant (e.g. "Return offer"). */
   .tag {
-    @apply inline-block rounded-full bg-pine-light px-2.5 py-0.5 text-xs font-medium text-pine;
+    @apply inline-block rounded-full bg-sand px-2.5 py-0.5 text-xs font-medium text-granite-muted;
+  }
+
+  .badge {
+    @apply inline-block rounded-full bg-clay-light px-2.5 py-0.5 text-xs font-medium text-clay;
   }
 }
 
