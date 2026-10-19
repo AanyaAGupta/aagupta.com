@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Fraunces } from 'next/font/google'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
+import IntroOverlay from '@/components/IntroOverlay'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
@@ -40,11 +41,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Apply the saved (or system) theme before first paint to avoid a light-mode flash. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`,
+            __html: `try{if(sessionStorage.getItem('intro-seen')||matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.dataset.intro='skip'}catch(e){document.documentElement.dataset.intro='skip'}try{var t=localStorage.getItem('theme');if(t==='dark'||(!t&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.classList.add('dark')}catch(e){}`,
           }}
         />
       </head>
       <body className="flex min-h-screen flex-col font-sans">
+        <IntroOverlay />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

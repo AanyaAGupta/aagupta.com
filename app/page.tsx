@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { profile, pitches } from '@/lib/content'
 import CopyEmail from '@/components/CopyEmail'
-import Climber from '@/components/Climber'
 import OrgLogo from '@/components/OrgLogo'
 import { ArrowIcon, GitHubIcon, LinkedInIcon } from '@/components/Marks'
 
@@ -62,29 +61,22 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Photo grid with the climber in its own tile */}
-          <div className="grid animate-rise grid-cols-2 gap-3 [animation-delay:120ms]">
-            <div className="row-span-2 flex items-center justify-center overflow-hidden rounded-2xl bg-sand/70">
-              <Climber className="h-full max-h-[440px] w-auto py-4" />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-2xl bg-sand">
-              <Image
-                src="/photos/patagonia-glacier-hike.jpg"
-                alt="Aanya hiking in front of a glacier in Patagonia"
-                fill
-                priority
-                sizes="(min-width: 1024px) 230px, 45vw"
-                className="object-cover object-[center_45%]"
-              />
-            </div>
-            <div className="relative aspect-square overflow-hidden rounded-2xl bg-sand">
-              <Image
-                src="/photos/coco.jpg"
-                alt="Coco, a fluffy brown dog, sitting in the grass"
-                fill
-                sizes="(min-width: 1024px) 230px, 45vw"
-                className="object-cover"
-              />
+          {/* Photo + Coco */}
+          <div className="relative mx-auto mt-10 w-full max-w-[420px] animate-rise [animation-delay:120ms] lg:mt-0">
+            <div className="relative aspect-[4/5]">
+              <div className="absolute inset-0 overflow-hidden rounded-3xl bg-sand shadow-xl shadow-granite/10">
+                <Image
+                  src="/photos/patagonia-glacier-hike.jpg"
+                  alt="Aanya hiking in front of a glacier in Patagonia"
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 420px, 90vw"
+                  className="object-cover object-[center_40%]"
+                />
+              </div>
+              <div className="absolute -bottom-6 -right-4 h-28 w-28 overflow-hidden rounded-2xl bg-sand shadow-lg ring-4 ring-chalk sm:h-32 sm:w-32">
+                <Image src="/photos/coco.jpg" alt="Coco, a fluffy brown dog" fill sizes="128px" className="object-cover" />
+              </div>
             </div>
           </div>
         </div>
