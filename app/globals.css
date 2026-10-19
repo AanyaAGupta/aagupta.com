@@ -91,86 +91,52 @@ body {
   }
 }
 
-/* Full-screen intro (components/IntroOverlay.tsx) */
+/* Full-screen intro (components/IntroOverlay.tsx): kept deliberately gentle. */
 html[data-intro='skip'] .intro-overlay {
   display: none;
 }
-.intro-ridge {
-  animation: intro-ridge 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+.intro-scene {
+  animation: intro-fade 0.7s ease-out both;
 }
 .intro-sun {
-  animation: intro-sun 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s both;
-}
-.intro-climber {
-  animation: intro-climb 1.5s cubic-bezier(0.45, 0, 0.55, 1) 1.05s both;
-}
-.intro-flag {
-  transform-box: fill-box;
-  transform-origin: left bottom;
-  animation: intro-flag 0.45s cubic-bezier(0.3, 1.6, 0.5, 1) 2.5s both;
+  animation: intro-sun 4s cubic-bezier(0.3, 0, 0.5, 1) both;
 }
 .intro-title {
-  animation: intro-title 0.7s ease-out 2.2s both;
+  animation: intro-title 1s ease-out 0.5s both;
 }
 .intro-exit {
-  animation: intro-exit 0.75s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  animation: intro-fade-out 0.8s ease-in-out forwards;
 }
 
-@keyframes intro-ridge {
+@keyframes intro-fade {
   from {
-    transform: translateY(420px);
+    opacity: 0;
   }
   to {
-    transform: translateY(0);
+    opacity: 1;
   }
 }
 @keyframes intro-sun {
   from {
-    transform: translateY(320px);
-    opacity: 0;
+    transform: translateY(-18px);
   }
   to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes intro-climb {
-  0% {
-    transform: translate(430px, 787px);
-    opacity: 0;
-  }
-  8% {
-    opacity: 1;
-  }
-  55% {
-    transform: translate(600px, 560px);
-  }
-  100% {
-    transform: translate(712px, 388px);
-    opacity: 1;
-  }
-}
-@keyframes intro-flag {
-  from {
-    transform: scale(0);
-  }
-  to {
-    transform: scale(1);
+    transform: translateY(14px);
   }
 }
 @keyframes intro-title {
   from {
     opacity: 0;
-    transform: translateY(14px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-@keyframes intro-exit {
+@keyframes intro-fade-out {
   to {
-    transform: translateY(-100%);
+    opacity: 0;
   }
 }
 

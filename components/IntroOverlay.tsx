@@ -2,12 +2,44 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
-// Full-screen sunrise intro: ridges rise, the sun comes up, a little climber summits and plants a flag, the name
-// appears, then the scene lifts away. Plays once per browser session; click / any key / "Skip" ends it early.
-// The inline script in app/layout.tsx hides it before paint when it was already seen or motion is reduced.
+// Full-screen sunset intro: the scene fades in, the sun settles toward the horizon, the name appears, then it all
+// fades away. Plays once per browser session; click / any key / "Skip" ends it early. The inline script in
+// app/layout.tsx hides it before paint when it was already seen or motion is reduced.
 
-const TOTAL_MS = 3600
-const EXIT_MS = 750
+const TOTAL_MS = 3300
+const EXIT_MS = 800
+const W = 1440
+const H = 900
+
+// Smooth, natural-looking ridgeline from layered sine waves (deterministic, so server and client match).
+function ridgeY(x: number, base: number, amp: number, seed: number) {
+  return (
+    base -
+    amp *
+      (0.55 * Math.sin(x * 0.0042 + seed) +
+        0.3 * Math.sin(x * 0.011 + seed * 2.1) +
+        0.15 * Math.sin(x * 0.027 + seed * 3.7) +
+        0.5)
+  )
+}
+
+function ridge(base: number, amp: number, seed: number) {
+  let d = `M0 ${ridgeY(0, base, amp, seed).toFixed(1)}`
+  for (let x = 10; x <= W; x += 10) d += ` L${x} ${ridgeY(x, base, amp, seed).toFixed(1)}`
+  return `${d} L${W} ${H} L0 ${H} Z`
+}
+
+// Far → near: lighter and hazier in the distance (atmospheric perspective), darker up close.
+const RIDGES = [
+  { d: ridge(600, 70, 1.3), fill: '#9C7A92' },
+  { d: ridge(660, 90, 4.2), fill: '#6D5476' },
+  { d: ridge(735, 110, 2.6), fill: '#43354F' },
+  { d: ridge(830, 120, 5.9), fill: '#1F1A28' },
+]
+
+// A tiny hiker standing on the nearest ridge, arms up.
+const HIKER_X = 1010
+const HIKER_Y = ridgeY(HIKER_X, 830, 120, 5.9)
 
 export default function IntroOverlay() {
   const [state, setState] = useState<'playing' | 'leaving' | 'done'>('playing')
@@ -46,79 +78,89 @@ export default function IntroOverlay() {
 
   return (
     <div
-      className={`intro-overlay fixed inset-0 z-[100] cursor-pointer overflow-hidden bg-[#F7EFE6] ${
+      className={`intro-overlay fixed inset-0 z-[100] cursor-pointer overflow-hidden bg-[#1F2747] ${
         state === 'leaving' ? 'intro-exit' : ''
       }`}
       onClick={leave}
       aria-hidden="true"
     >
-      <svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMax slice" className="absolute inset-0 h-full w-full">
+      <svg
+        viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="xMidYMax slice"
+        className="intro-scene absolute inset-0 h-full w-full"
+      >
         <defs>
           <linearGradient id="intro-sky" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#F7EFE6" />
-            <stop offset="65%" stopColor="#F6DCC8" />
-            <stop offset="100%" stopColor="#EFC3A6" />
+            <stop offset="0%" stopColor="#1F2747" />
+            <stop offset="30%" stopColor="#3E3A68" />
+            <stop offset="50%" stopColor="#8A4F78" />
+            <stop offset="63%" stopColor="#D1667A" />
+            <stop offset="73%" stopColor="#F08A5D" />
+            <stop offset="80%" stopColor="#FBBF6E" />
+            <stop offset="100%" stopColor="#FCD9A0" />
           </linearGradient>
-          <radialGradient id="intro-glow">
-            <stop offset="0%" stopColor="#F2A879" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="#F2A879" stopOpacity="0" />
+          <radialGradient id="intro-glow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0%" stopColor="#FFE6B0" stopOpacity="0.9" />
+            <stop offset="25%" stopColor="#FFC27A" stopOpacity="0.55" />
+            <stop offset="60%" stopColor="#F28A5E" stopOpacity="0.18" />
+            <stop offset="100%" stopColor="#F28A5E" stopOpacity="0" />
           </radialGradient>
+          <filter id="intro-soft" x="-20%" y="-200%" width="140%" height="500%">
+            <feGaussianBlur stdDeviation="3" />
+          </filter>
+          <linearGradient id="intro-haze" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FBC27A" stopOpacity="0" />
+            <stop offset="100%" stopColor="#FBC27A" stopOpacity="0.28" />
+          </linearGradient>
         </defs>
-        <rect width="1440" height="900" fill="url(#intro-sky)" />
 
-        {/* Sun */}
-        <g className="intro-sun">
-          <circle cx="1060" cy="470" r="230" fill="url(#intro-glow)" />
-          <circle cx="1060" cy="470" r="86" fill="#E58E5E" />
+        <rect width={W} height={H} fill="url(#intro-sky)" />
+
+        {/* Thin clouds low in the sky, lit from below */}
+        <g opacity="0.6" filter="url(#intro-soft)">
+          <ellipse cx="330" cy="455" rx="240" ry="7" fill="#F5A783" />
+          <ellipse cx="470" cy="472" rx="150" ry="5" fill="#F9BE8E" />
+          <ellipse cx="1150" cy="430" rx="210" ry="6" fill="#EC967F" />
+          <ellipse cx="1040" cy="448" rx="120" ry="4.5" fill="#F5AE88" />
         </g>
 
-        {/* Ridges, back to front */}
-        <path
-          className="intro-ridge [animation-delay:0ms]"
-          d="M0 610 L170 520 L330 575 L520 440 L700 525 L860 415 L1040 505 L1220 430 L1440 515 L1440 900 L0 900 Z"
-          fill="#D8C9B5"
-        />
-        <path
-          className="intro-ridge [animation-delay:140ms]"
-          d="M0 700 L160 635 L340 690 L540 565 L720 640 L900 545 L1100 650 L1280 580 L1440 640 L1440 900 L0 900 Z"
-          fill="#7F9A88"
-        />
-        <g className="intro-ridge [animation-delay:280ms]">
-          <path
-            d="M0 820 L220 760 L420 800 L600 560 L720 380 L800 470 L880 430 L1020 620 L1200 740 L1440 700 L1440 900 L0 900 Z"
-            fill="#2F4A3C"
-          />
-          {/* Snow on the summit */}
-          <path d="M664 465 L720 380 L772 444 L750 455 L731 433 L706 463 L689 449 Z" fill="#F7F3EC" opacity="0.92" />
+        {/* Sun, settling toward the horizon */}
+        <g className="intro-sun">
+          <circle cx="760" cy="590" r="400" fill="url(#intro-glow)" />
+          <circle cx="760" cy="590" r="56" fill="#FFE9B8" />
+        </g>
 
-          {/* Climber hiking up the left ridge */}
-          <g className="intro-climber">
-            <g transform="translate(0 -32) scale(1.7)">
-              <circle cx="0" cy="-14" r="5.5" fill="#1D1511" />
-              <path d="M-5.6 -15 A5.8 5.8 0 0 1 5.6 -15 Z" fill="#E58E5E" />
-              <path d="M-4 -8 L4 -8 L3 6 L-3 6 Z" fill="#FFFFFF" />
-              <rect x="-4.5" y="4" width="9" height="3" rx="1.5" fill="#1E8A7E" />
-              <path d="M-2 7 L-5 19 M2 7 L5 19" stroke="#F7F3EC" strokeWidth="3" strokeLinecap="round" />
-              <path d="M-4 -6 L-9 2 M4 -6 L10 -3" stroke="#F7F3EC" strokeWidth="2.6" strokeLinecap="round" />
-              <rect x="-7" y="-8" width="5" height="9" rx="2" fill="#E58E5E" />
-            </g>
+        {RIDGES.map((r, i) => (
+          <g key={i}>
+            <path d={r.d} fill={r.fill} />
+            {i < RIDGES.length - 1 && <path d={r.d} fill="url(#intro-haze)" />}
           </g>
+        ))}
 
-          {/* Summit flag */}
-          <g className="intro-flag">
-            <line x1="724" y1="382" x2="724" y2="330" stroke="#F7F3EC" strokeWidth="3" strokeLinecap="round" />
-            <path d="M724 332 L762 343 L724 356 Z" fill="#E58E5E" />
-          </g>
+        {/* Hiker silhouette */}
+        <g
+          transform={`translate(${HIKER_X} ${(HIKER_Y - 1).toFixed(1)})`}
+          fill="#1F1A28"
+          stroke="#1F1A28"
+          strokeLinecap="round"
+        >
+          <circle cx="0" cy="-27" r="3.6" stroke="none" />
+          <path d="M0 -23 L0 -11" strokeWidth="4" />
+          <path d="M0 -21 L-6 -31 M0 -21 L6 -31" strokeWidth="2.2" />
+          <path d="M0 -11 L-3.5 0 M0 -11 L3.5 0" strokeWidth="2.6" />
         </g>
       </svg>
 
       {/* Name */}
-      <div className="absolute inset-x-0 top-[16%] px-6 text-center sm:top-[18%]">
-        <p className="intro-title font-serif text-5xl font-semibold tracking-tight text-[#2A2825] sm:text-7xl">
+      <div className="absolute inset-x-0 top-[22%] px-6 text-center">
+        <p
+          className="intro-title font-serif text-5xl font-medium tracking-tight text-white sm:text-7xl"
+          style={{ textShadow: '0 2px 24px rgba(31, 26, 40, 0.35)' }}
+        >
           Aanya Gupta
         </p>
-        <p className="intro-title mt-3 text-base text-[#5F5A52] [animation-delay:2550ms] sm:text-lg">
-          Biomedical + electrical & computer engineering at Duke
+        <p className="intro-title mt-4 text-base text-white/80 [animation-delay:900ms] sm:text-lg">
+          Engineering at Duke
         </p>
       </div>
 
@@ -128,7 +170,7 @@ export default function IntroOverlay() {
           e.stopPropagation()
           leave()
         }}
-        className="absolute bottom-5 right-5 rounded-full bg-white/70 px-4 py-1.5 text-sm text-[#2A2825] backdrop-blur hover:bg-white"
+        className="absolute bottom-5 right-5 rounded-full border border-white/30 px-4 py-1.5 text-sm text-white/85 hover:bg-white/10"
       >
         Skip
       </button>
